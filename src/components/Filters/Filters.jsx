@@ -17,6 +17,7 @@ const Filters = ({ filter, updateFilter }) => {
       })
   }, [])
   const handleFilterIsNewUpdate = () => updateFilter({ isNew: !filter.isNew })
+  const handleFilterIsLimitedUpdate = () => updateFilter({ isLimited: !filter.isLimited })
   return (
     <section className="filters">
       <div className="filters__container">
@@ -49,8 +50,14 @@ const Filters = ({ filter, updateFilter }) => {
             <h3 className="status__title">Status</h3>
             <div className="status__wrapper">
               <div>
-                <input className="status__checkbox" id="limited" type="checkbox" />
-                <label htmlFor="limited">Limited</label>
+                <input
+                  className="status__checkbox"
+                  id="is_limited"
+                  type="checkbox"
+                  onChange={handleFilterIsLimitedUpdate}
+                  checked={filter.isLimited}
+                />
+                <label htmlFor="is_limited">Limited</label>
               </div>
               <div>
                 <input
