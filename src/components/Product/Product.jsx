@@ -9,7 +9,7 @@ const Product = ({ item }) => {
           {item.isLimited && <p className="product__chevron product__chevron--limited">Limited</p>}
           {item.isNew && <p className="product__chevron product__chevron--new">New</p>}
         </div>
-        <div className="product__image"></div>
+        <div className={`product__image product__image--${item.categoryType}`}></div>
         <div className="product__content">
           <p className="product__category">{item.categoryName}</p>
           <h3 className="product__title">{item.name}</h3>

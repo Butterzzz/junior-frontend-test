@@ -10,13 +10,36 @@
 }
 
 .product__image {
-    background-image: url(../../images/product-image.png);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 0 100%;
     border-radius: 16px;
     width: 116px;
     height: auto;
+}
+
+.product__image--barley {
+    background-image: url(../../images/Barley.png);
+}
+
+.product__image--canola {
+    background-image: url(../../images/Canola.png);
+}
+
+.product__image--corn {
+    background-image: url(../../images/Corn.png);
+}
+
+.product__image--oats {
+    background-image: url(../../images/Oats.png);
+}
+
+.product__image--soybeans {
+    background-image: url(../../images/Soybeans.png);
+}
+
+.product__image--wheat {
+    background-image: url(../../images/Wheat.png);
 }
 
 .product__title {
