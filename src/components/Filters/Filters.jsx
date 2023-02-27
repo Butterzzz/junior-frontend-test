@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Filters.css'
 
-const Filters = () => {
+const Filters = ({ filter, updateFilter }) => {
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState('All')
   function handleCategorySelect(name) {
@@ -16,7 +16,7 @@ const Filters = () => {
         console.log(err)
       })
   }, [])
-  console.log(selectedCategory)
+  const handleFilterIsNewUpdate = () => updateFilter({ isNew: !filter.isNew })
   return (
     <section className="filters">
       <div className="filters__container">
@@ -53,7 +53,13 @@ const Filters = () => {
                 <label htmlFor="limited">Limited</label>
               </div>
               <div>
-                <input className="status__checkbox" id="is_new" type="checkbox" />
+                <input
+                  className="status__checkbox"
+                  id="is_new"
+                  type="checkbox"
+                  onChange={handleFilterIsNewUpdate}
+                  checked={filter.isNew}
+                />
                 <label htmlFor="is_new">Is new</label>
               </div>
             </div>

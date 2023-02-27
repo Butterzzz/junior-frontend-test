@@ -1,15 +1,15 @@
 import Header from './components/Header/Header'
 import Filters from './components/Filters/Filters'
-import ProductList2 from './components/ProductList/ProductList2'
 import ProductList from './components/ProductList/ProductList.jsx'
+import { useProductList } from './components/ProductList/useProductList'
 
 function App() {
+  const { items, filter, updateFilter } = useProductList()
   return (
     <div>
       <Header />
-      <Filters />
-      <ProductList2 />
-      <ProductList />
+      <Filters filter={filter} updateFilter={updateFilter} />
+      <ProductList items={items} />
     </div>
   )
 }

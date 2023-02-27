@@ -1,10 +1,8 @@
 import React from 'react'
 import './ProductList.css'
 import Product from '../Product/Product'
-import { useProductList } from './useProductList'
 
-const ProductList = () => {
-  const { items } = useProductList()
+const ProductList = ({ items }) => {
   return (
     <section className="products">
       <ul className="products__list">
