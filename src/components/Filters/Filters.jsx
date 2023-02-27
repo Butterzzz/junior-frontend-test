@@ -1,7 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './Filters.css'
 
 const Filters = () => {
+  const [categories, setCategories] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState('All')
+  function handleCategorySelect(name) {
+    setSelectedCategory(name)
+  }
+
+  useEffect(() => {
+    fetch('/api/category')
+      .then(res => res.json())
+      .then(categories => setCategories(categories))
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+  console.log(selectedCategory)
   return (
     <section className="filters">
       <div className="filters__container">
@@ -12,43 +27,23 @@ const Filters = () => {
         <div className="filters__wrapper">
           <div className="filters__category category">
             <h3 className="category__title">Category</h3>
-            <ul className="category__list">
-              <li className="category__item">
-                <a href="#" className="category__link category__link--active">
-                  All
-                </a>
-              </li>
-              <li className="category__item">
-                <a href="#" className="category__link">
-                  Canola
-                </a>
-              </li>
-              <li className="category__item">
-                <a href="#" className="category__link">
-                  Corn
-                </a>
-              </li>
-              <li className="category__item">
-                <a href="#" className="category__link">
-                  Oats
-                </a>
-              </li>
-              <li className="category__item">
-                <a href="#" className="category__link">
-                  Wheat
-                </a>
-              </li>
-              <li className="category__item">
-                <a href="#" className="category__link">
-                  Soybeans
-                </a>
-              </li>
-              <li className="category__item">
-                <a href="#" className="category__link category__link--disabled">
-                  Barley
-                </a>
-              </li>
-            </ul>
+            <div className="category__container">
+              <button
+                className={`category__button ${selectedCategory === 'All' ? 'category__button--active' : ''}`}
+                onClick={() => handleCategorySelect('All')}
+              >
+                All
+              </button>
+              {categories.map(category => (
+                <button
+                  key={category.id}
+                  className={`category__button ${selectedCategory === category.name ? 'category__button--active' : ''}`}
+                  onClick={() => handleCategorySelect(category.name)}
+                >
+                  {category.name}
+                </button>
+              ))}
+            </div>
           </div>
           <div className="filters__status status">
             <h3 className="status__title">Status</h3>
