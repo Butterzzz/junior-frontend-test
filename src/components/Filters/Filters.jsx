@@ -3,10 +3,10 @@ import './Filters.css'
 
 const Filters = ({ filter, updateFilter }) => {
   const [categories, setCategories] = useState([])
-  const [selectedCategory, setSelectedCategory] = useState('All')
-  function handleCategorySelect(name) {
-    setSelectedCategory(name)
-  }
+  // const [selectedCategory, setSelectedCategory] = useState('All')
+  // function handleCategorySelect(name) {
+  //   setSelectedCategory(name)
+  // }
 
   useEffect(() => {
     fetch('/api/category')
@@ -18,6 +18,7 @@ const Filters = ({ filter, updateFilter }) => {
   }, [])
   const handleFilterIsNewUpdate = () => updateFilter({ isNew: !filter.isNew })
   const handleFilterIsLimitedUpdate = () => updateFilter({ isLimited: !filter.isLimited })
+  const handleCategorySelect = categoryId => updateFilter({ category: [categoryId] })
   return (
     <section className="filters">
       <div className="filters__container">
@@ -29,17 +30,17 @@ const Filters = ({ filter, updateFilter }) => {
           <div className="filters__category category">
             <h3 className="category__title">Category</h3>
             <div className="category__container">
-              <button
+              {/* <button
                 className={`category__button ${selectedCategory === 'All' ? 'category__button--active' : ''}`}
                 onClick={() => handleCategorySelect('All')}
               >
                 All
-              </button>
+              </button> */}
               {categories.map(category => (
                 <button
                   key={category.id}
-                  className={`category__button ${selectedCategory === category.name ? 'category__button--active' : ''}`}
-                  onClick={() => handleCategorySelect(category.name)}
+                  // className={`category__button ${selectedCategory === category.name ? 'category__button--active' : ''}`}
+                  onClick={() => handleCategorySelect(category.id)}
                 >
                   {category.name}
                 </button>
