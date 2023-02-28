@@ -3,10 +3,7 @@ import './Filters.css'
 
 const Filters = ({ filter, updateFilter }) => {
   const [categories, setCategories] = useState([])
-  // const [selectedCategory, setSelectedCategory] = useState('All')
-  // function handleCategorySelect(name) {
-  //   setSelectedCategory(name)
-  // }
+  const [selectedCategory, setSelectedCategory] = useState('All')
 
   useEffect(() => {
     fetch('/api/category')
@@ -18,7 +15,7 @@ const Filters = ({ filter, updateFilter }) => {
   }, [])
   const handleFilterIsNewUpdate = () => updateFilter({ isNew: !filter.isNew })
   const handleFilterIsLimitedUpdate = () => updateFilter({ isLimited: !filter.isLimited })
-  const handleCategorySelect = categoryId => updateFilter({ category: [categoryId] })
+  const handleCategorySelect = categoryId => (updateFilter({ category: [categoryId] }), setSelectedCategory(categoryId))
   return (
     <section className="filters">
       <div className="filters__container">
@@ -39,7 +36,7 @@ const Filters = ({ filter, updateFilter }) => {
               {categories.map(category => (
                 <button
                   key={category.id}
-                  // className={`category__button ${selectedCategory === category.name ? 'category__button--active' : ''}`}
+                  className={`category__button ${selectedCategory === category.id ? 'category__button--active' : ''}`}
                   onClick={() => handleCategorySelect(category.id)}
                 >
                   {category.name}
