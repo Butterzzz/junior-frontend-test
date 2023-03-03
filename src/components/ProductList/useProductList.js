@@ -6,6 +6,7 @@ const initialState = {
     isLimited: false,
     category: [],
   },
+  searchQuery: '',
   status: 'idle', // idle | work | success | error
   items: [],
 }
@@ -29,6 +30,20 @@ const reducer = (state, action) => {
         filter: {
           ...initialState.filter,
         },
+      }
+    }
+    case 'search:change': {
+      return {
+        ...state,
+        status: 'work',
+        searchQuery: action.payload,
+      }
+    }
+    case 'search:reset': {
+      return {
+        ...state,
+        status: 'work',
+        searchQuery: '',
       }
     }
     case 'request:start': {
@@ -56,12 +71,13 @@ export const useProductList = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const updateFilter = useCallback((filter = {}) => dispatch({ type: 'filter:change', payload: filter }), [])
   const resetFilter = useCallback(() => dispatch({ type: 'filter:reset' }), [])
+  const updateSearchQuery = useCallback((query = '') => dispatch({ type: 'search:change', payload: query }), [])
   const performRequest = useCallback(() => {
     dispatch({ type: 'request:start' })
     // prettier-ignore
     const serializeFilter = filter => [
       ...filter.category.map(categoryId => `category[]=${categoryId}`),
-      `isNew=${filter.isNew}`, `isLimited=${filter.isLimited}`,
+      `isNew=${filter.isNew}`, `isLimited=${filter.isLimited}`, `search=${state.searchQuery}`,
     ].join('&')
 
     fetch(`/api/product?${serializeFilter(state.filter)}`)
@@ -76,7 +92,7 @@ export const useProductList = () => {
         console.error(err)
         dispatch({ type: 'request:error' })
       })
-  }, [state.filter])
+  }, [state.filter, state.searchQuery])
 
   useEffect(() => {
     performRequest()
@@ -86,5 +102,6 @@ export const useProductList = () => {
     ...state,
     updateFilter,
     resetFilter,
+    updateSearchQuery,
   }
 }

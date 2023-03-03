@@ -4,10 +4,10 @@ import ProductList from './components/ProductList/ProductList.jsx'
 import { useProductList } from './components/ProductList/useProductList'
 
 function App() {
-  const { items, filter, updateFilter, resetFilter } = useProductList()
+  const { items, filter, updateFilter, resetFilter, updateSearchQuery } = useProductList()
   return (
     <div>
-      <Header />
+      <Header updateSearchQuery={updateSearchQuery} />
       <Filters filter={filter} updateFilter={updateFilter} resetFilter={resetFilter} />
       <ProductList items={items} />
     </div>
