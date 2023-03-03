@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Filters.css'
 
-const Filters = ({ filter, updateFilter }) => {
+const Filters = ({ filter, updateFilter, resetFilter }) => {
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState('All')
 
@@ -16,6 +16,7 @@ const Filters = ({ filter, updateFilter }) => {
   const handleFilterIsNewUpdate = () => updateFilter({ isNew: !filter.isNew })
   const handleFilterIsLimitedUpdate = () => updateFilter({ isLimited: !filter.isLimited })
   const handleCategorySelect = categoryId => (updateFilter({ category: [categoryId] }), setSelectedCategory(categoryId))
+  const handleCategoryAll = () => (resetFilter(), setSelectedCategory('All'))
   return (
     <section className="filters">
       <div className="filters__container">
@@ -27,12 +28,12 @@ const Filters = ({ filter, updateFilter }) => {
           <div className="filters__category category">
             <h3 className="category__title">Category</h3>
             <div className="category__container">
-              {/* <button
+              <button
                 className={`category__button ${selectedCategory === 'All' ? 'category__button--active' : ''}`}
-                onClick={() => handleCategorySelect('All')}
+                onClick={handleCategoryAll}
               >
                 All
-              </button> */}
+              </button>
               {categories.map(category => (
                 <button
                   key={category.id}
