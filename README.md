@@ -1,5 +1,7 @@
 ## Задача
 
+[Оригинал тестового задания взят отсюда](https://github.com/Agro-Club/junior-frontend-test) 
+
 #### Реализовать компонент для отображения списка продуктов из API с выбранным фильтром и поиском.
 
 ![](design.png)
@@ -135,3 +137,12 @@ npm start
 
 Проект создан с помощью [Create React App](https://github.com/facebook/create-react-app).
 
+--------------------
+
+## Задача решена
+
+#### P.S Точно не запускаеся на Node.js 18 выше.
+
+### Анимация с моим решением:
+
+![bandicam 2023-03-05 04-36-48-082](https://user-images.githubusercontent.com/70523471/222925894-050fdbe3-ec19-460f-a6ac-a994262b8d18.gif)
